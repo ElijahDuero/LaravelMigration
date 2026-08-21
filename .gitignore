@@ -9,7 +9,7 @@
 /resources/js/actions
 /resources/js/routes
 /resources/js/wayfinder
-/vendor
+# /vendor - tracked for Vercel deployment (PHP not available in build environment)
 .DS_Store
 .env
 .env.backup
@@ -26,3 +26,5 @@ yarn-error.log
 /.nova
 /.vscode
 /.zed
+
+.vercel

@@ -1,6 +1,6 @@
 {
     "version": 2,
-    "buildCommand": "curl -sS https://getcomposer.org/installer | php && php composer.phar install --no-dev --optimize-autoloader --no-interaction",
+    "buildCommand": "echo 'vendor and assets are pre-committed'",
     "outputDirectory": "public",
     "functions": {
         "api/index.php": {
