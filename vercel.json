@@ -1,6 +1,6 @@
 {
     "version": 2,
-    "buildCommand": "echo 'Skipping npm build because assets are pre-compiled'",
+    "buildCommand": "composer install --no-dev --optimize-autoloader --no-interaction",
     "outputDirectory": "public",
     "functions": {
         "api/index.php": {
@@ -13,7 +13,7 @@
             "dest": "/build/$1"
         },
         {
-            "src": "/(favicon\.(?:ico|png|svg)|apple-touch-icon\.png|robots\.txt)",
+            "src": "/(favicon\\.(?:ico|png|svg)|apple-touch-icon\\.png|robots\\.txt)",
             "dest": "/$1"
         },
         {
@@ -23,8 +23,7 @@
     ],
     "env": {
         "APP_ENV": "production",
-        "APP_DEBUG": "true",
-        "APP_KEY": "base64:ySAsSGaAH1FYwrHoY0n2ouXaqXkp872h8JrHPvEIipw=",
+        "APP_DEBUG": "false",
         "LOG_CHANNEL": "stderr",
         "CACHE_STORE": "array",
         "SESSION_DRIVER": "cookie",
