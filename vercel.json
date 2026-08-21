@@ -9,12 +9,7 @@
     },
     "routes": [
         {
-            "src": "/build/(.*)",
-            "dest": "/public/build/$1"
-        },
-        {
-            "src": "/(assets|favicon.ico|favicon.png)/(.*)",
-            "dest": "/public/$1/$2"
+            "handle": "filesystem"
         },
         {
             "src": "/(.*)",
