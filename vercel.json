@@ -10,6 +10,14 @@
             "use": "vercel-php@0.9.0"
         }
     ],
+    "env": {
+        "APP_ENV": "production",
+        "APP_DEBUG": "true",
+        "LOG_CHANNEL": "stderr",
+        "CACHE_STORE": "array",
+        "SESSION_DRIVER": "cookie",
+        "QUEUE_CONNECTION": "sync"
+    },
     "routes": [
         {
             "src": "/(build|assets)/(.*)",
