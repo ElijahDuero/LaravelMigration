@@ -34,14 +34,8 @@ $app = Application::configure(basePath: dirname(__DIR__))
         );
     })->create();
 
-if (isset($_ENV['VERCEL']) || getenv('VERCEL')) {
+if (is_dir('/tmp') || isset($_ENV['VERCEL']) || getenv('VERCEL') || isset($_SERVER['VERCEL'])) {
     $app->useStoragePath('/tmp/storage');
-    if (!is_dir('/tmp/storage/framework/views')) {
-        @mkdir('/tmp/storage/framework/views', 0777, true);
-        @mkdir('/tmp/storage/framework/cache/data', 0777, true);
-        @mkdir('/tmp/storage/framework/sessions', 0777, true);
-        @mkdir('/tmp/storage/logs', 0777, true);
-    }
 }
 
 return $app;
