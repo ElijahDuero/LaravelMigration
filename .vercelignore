@@ -1,0 +1,27 @@
+# Vercel upload exclusions
+# Prevent local dev artifacts from being uploaded
+
+# Vite dev server HMR file - must NEVER be deployed (causes all assets to load from localhost)
+public/hot
+
+# Local dev dependencies
+node_modules/
+
+# Local environment files
+.env
+.env.backup
+.env.production
+
+# Git metadata
+.git/
+
+# IDE files
+.vscode/
+.idea/
+.fleet/
+.nova/
+.zed/
+
+# Test and lint caches
+.phpunit.cache/
+.phpunit.result.cache
