@@ -34,7 +34,7 @@ $app = Application::configure(basePath: dirname(__DIR__))
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->report(function (\Throwable $e) {
-            error_log('[LARAVEL EXCEPTION] ' . get_class($e) . ': ' . $e->getMessage() . "\n" . $e->getFile() . ':' . $e->getLine() . "\n" . $e->getTraceAsString());
+            error_log('!!! CRASH: ' . get_class($e) . ' => ' . $e->getMessage() . ' IN ' . $e->getFile() . ':' . $e->getLine());
         });
 
         $exceptions->shouldRenderJsonWhen(
