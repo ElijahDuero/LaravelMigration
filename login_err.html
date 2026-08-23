@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="" class="">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        
+        <script>
+            (function() {
+                const appearance = 'system';
+
+                if (appearance === 'system') {
+                    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+                    if (prefersDark) {
+                        document.documentElement.classList.add('dark');
+                    }
+                }
+            })();
+        </script>
+
+        
+        <style>
+            html {
+                background-color: oklch(1 0 0);
+            }
+
+            html.dark {
+                background-color: oklch(0.145 0 0);
+            }
+        </style>
+
+        <link rel="icon" href="/favicon.ico" sizes="any">
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+        <link rel="preload" as="font" href="https://laravel-migration.vercel.app/build/assets/instrument-sans-400-normal-DRC__1Mx.woff2" type="font/woff2" crossorigin="anonymous" />
+<link rel="preload" as="font" href="https://laravel-migration.vercel.app/build/assets/instrument-sans-500-normal-Dk9ku72i.woff2" type="font/woff2" crossorigin="anonymous" />
+<link rel="preload" as="font" href="https://laravel-migration.vercel.app/build/assets/instrument-sans-600-normal-B7fBEWYG.woff2" type="font/woff2" crossorigin="anonymous" />
+<style>
+@font-face {
+  font-family: "Instrument Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/build/assets/instrument-sans-400-normal-DRC__1Mx.woff2") format("woff2");
+  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+}
+
+@font-face {
+  font-family: "Instrument Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/build/assets/instrument-sans-400-normal-D1W7dsQl.woff") format("woff");
+  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+}
+
+@font-face {
+  font-family: "Instrument Sans";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("/build/assets/instrument-sans-500-normal-Dk9ku72i.woff2") format("woff2");
+  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+}
+
+@font-face {
+  font-family: "Instrument Sans";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("/build/assets/instrument-sans-500-normal-Z6ESRlEs.woff") format("woff");
+  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+}
+
+@font-face {
+  font-family: "Instrument Sans";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("/build/assets/instrument-sans-600-normal-B7fBEWYG.woff2") format("woff2");
+  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+}
+
+@font-face {
+  font-family: "Instrument Sans";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("/build/assets/instrument-sans-600-normal-B9e8oLYv.woff") format("woff");
+  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+}
+
+:root {
+  --font-instrument-sans: "Instrument Sans";
+}
+
+.font-instrument-sans {
+  font-family: var(--font-instrument-sans);
+}
+</style>
+                <link rel="preload" as="style" href="https://laravel-migration.vercel.app/build/assets/app-CN4iXc_p.css" /><link rel="modulepreload" as="script" href="https://laravel-migration.vercel.app/build/assets/app-gg8OyRG2.js" /><link rel="modulepreload" as="script" href="https://laravel-migration.vercel.app/build/assets/jsx-runtime-Cltr0gcK.js" /><link rel="modulepreload" as="script" href="https://laravel-migration.vercel.app/build/assets/dist-CdKiTPGr.js" /><link rel="modulepreload" as="script" href="https://laravel-migration.vercel.app/build/assets/compiler-runtime-CG3rjhow.js" /><link rel="modulepreload" as="script" href="https://laravel-migration.vercel.app/build/assets/use-appearance-DYzs3pTh.js" /><link rel="modulepreload" as="script" href="https://laravel-migration.vercel.app/build/assets/dist-C_fpFpy7.js" /><link rel="modulepreload" as="script" href="https://laravel-migration.vercel.app/build/assets/button-TQChvaRz.js" /><link rel="modulepreload" as="script" href="https://laravel-migration.vercel.app/build/assets/createLucideIcon-Blpysy3u.js" /><link rel="modulepreload" as="script" href="https://laravel-migration.vercel.app/build/assets/dist-BvvAiQAH.js" /><link rel="modulepreload" as="script" href="https://laravel-migration.vercel.app/build/assets/dist-BQoU8mMT.js" /><link rel="modulepreload" as="script" href="https://laravel-migration.vercel.app/build/assets/dist-BAXBl8wE.js" /><link rel="modulepreload" as="script" href="https://laravel-migration.vercel.app/build/assets/input-_Yf34uZt.js" /><link rel="modulepreload" as="script" href="https://laravel-migration.vercel.app/build/assets/separator-CSebLWkl.js" /><link rel="modulepreload" as="script" href="https://laravel-migration.vercel.app/build/assets/routes-BZ4t1sNs.js" /><link rel="modulepreload" as="script" href="https://laravel-migration.vercel.app/build/assets/wayfinder-Dp7PqxvV.js" /><link rel="modulepreload" as="script" href="https://laravel-migration.vercel.app/build/assets/profile-uNtLFEsD.js" /><link rel="modulepreload" as="script" href="https://laravel-migration.vercel.app/build/assets/heading-C_e6EmDg.js" /><link rel="modulepreload" as="script" href="https://laravel-migration.vercel.app/build/assets/appearance-B6s7A8vg.js" /><link rel="modulepreload" as="script" href="https://laravel-migration.vercel.app/build/assets/security-ZZC6IP8e.js" /><link rel="modulepreload" as="script" href="https://laravel-migration.vercel.app/build/assets/login-DHZHxzCv.js" /><link rel="modulepreload" as="script" href="https://laravel-migration.vercel.app/build/assets/check-3ZPvvSP9.js" /><link rel="modulepreload" as="script" href="https://laravel-migration.vercel.app/build/assets/password-input-BS8hFB8z.js" /><link rel="modulepreload" as="script" href="https://laravel-migration.vercel.app/build/assets/input-error-_fIfMmin.js" /><link rel="modulepreload" as="script" href="https://laravel-migration.vercel.app/build/assets/spinner-Bk_RShSs.js" /><link rel="modulepreload" as="script" href="https://laravel-migration.vercel.app/build/assets/loader-circle-BWMjGvlV.js" /><link rel="modulepreload" as="script" href="https://laravel-migration.vercel.app/build/assets/passkey-verify-D-afKwmS.js" /><link rel="modulepreload" as="script" href="https://laravel-migration.vercel.app/build/assets/react-COzkod1P.js" /><link rel="modulepreload" as="script" href="https://laravel-migration.vercel.app/build/assets/label-CmD-r3k_.js" /><link rel="modulepreload" as="script" href="https://laravel-migration.vercel.app/build/assets/text-link-YCQamMft.js" /><link rel="modulepreload" as="script" href="https://laravel-migration.vercel.app/build/assets/password-CB_NxgQN.js" /><link rel="modulepreload" as="script" href="https://laravel-migration.vercel.app/build/assets/confirm-Culw9Q-x.js" /><link rel="stylesheet" href="https://laravel-migration.vercel.app/build/assets/app-CN4iXc_p.css" /><script type="module" src="https://laravel-migration.vercel.app/build/assets/app-gg8OyRG2.js"></script><script type="module" src="https://laravel-migration.vercel.app/build/assets/login-DHZHxzCv.js"></script>        <title>CyberSec</title>
+    </head>
+    <body class="font-sans antialiased">
+        <script data-page="app" type="application/json">{"component":"auth\/login","props":{"errors":{},"name":"CyberSec","auth":{"user":null},"sidebarOpen":true,"canResetPassword":true,"status":null},"url":"\/login","version":"f5c25f40c421845081cb5d26da402668","sharedProps":["errors","name","auth","sidebarOpen"]}</script><div id="app"></div>
+    </body>
+</html>

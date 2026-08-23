@@ -1,5 +1,10 @@
 <?php
 
+// Temporary: force PHP error display to catch silent 500s
+ini_set('display_errors', '1');
+ini_set('display_startup_errors', '1');
+error_reporting(E_ALL);
+
 $tmpDirs = [
     '/tmp/storage/app/public',
     '/tmp/storage/framework/cache/data',
