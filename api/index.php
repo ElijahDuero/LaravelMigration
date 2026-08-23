@@ -1,9 +1,16 @@
 <?php
 
-// Temporary: force PHP error display to catch silent 500s
 ini_set('display_errors', '1');
 ini_set('display_startup_errors', '1');
 error_reporting(E_ALL);
+
+// DIAGNOSTIC: dump request info for POST to /login only
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && strpos($_SERVER['REQUEST_URI'] ?? '', 'login') !== false) {
+    error_log('[DIAG] POST /login reached PHP. URI=' . ($_SERVER['REQUEST_URI'] ?? 'unknown'));
+    error_log('[DIAG] CONTENT_TYPE=' . ($_SERVER['CONTENT_TYPE'] ?? 'none'));
+    error_log('[DIAG] CONTENT_LENGTH=' . ($_SERVER['CONTENT_LENGTH'] ?? 'none'));
+    error_log('[DIAG] Cookie count=' . count($_COOKIE));
+}
 
 $tmpDirs = [
     '/tmp/storage/app/public',
