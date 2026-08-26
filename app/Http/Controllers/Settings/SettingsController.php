@@ -201,19 +201,20 @@ class SettingsController extends Controller
 
     private function getSampleCounts(): array
     {
-        try {
-            return [
-                'incidents'    => (int) DB::table('incidents')->where('is_sample', 1)->count(),
-                'hardware'     => (int) DB::table('hardware')->where('is_sample', 1)->count(),
-                'software'     => (int) DB::table('software')->where('is_sample', 1)->count(),
-                'threat_intel' => (int) DB::table('threat_intel')->where('is_sample', 1)->count(),
-                'systems'      => (int) DB::table('systems')->where('created_by', 'seeder')->count(),
-                'branches'     => (int) DB::table('branches')->where('created_by', 'seeder')->count(),
-            ];
-        } catch (\Throwable) {
-            return ['incidents' => 0, 'hardware' => 0, 'software' => 0,
-                    'threat_intel' => 0, 'systems' => 0, 'branches' => 0];
-        }
+        $count = fn(string $table, string $column, mixed $value): int => (int) rescue(
+            fn() => DB::table($table)->where($column, $value)->count(),
+            0,
+            false
+        );
+
+        return [
+            'incidents'    => $count('incidents', 'is_sample', 1),
+            'hardware'     => $count('hardware', 'is_sample', 1),
+            'software'     => $count('software', 'is_sample', 1),
+            'threat_intel' => $count('threat_intel', 'is_sample', 1),
+            'systems'      => $count('systems', 'created_by', 'seeder'),
+            'branches'     => $count('branches', 'created_by', 'seeder'),
+        ];
     }
 
     private function getAuditData(Request $request): array
