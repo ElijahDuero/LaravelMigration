@@ -1,16 +1,18 @@
-import AppLayoutTemplate from '@/layouts/app/app-sidebar-layout';
+import AppLayout from '@/components/AppLayout';
 import type { BreadcrumbItem } from '@/types';
 
-export default function AppLayout({
+export default function Layout({
     breadcrumbs = [],
     children,
 }: {
     breadcrumbs?: BreadcrumbItem[];
     children: React.ReactNode;
 }) {
+    const pageTitle = breadcrumbs.length > 0 ? breadcrumbs[breadcrumbs.length - 1].title : undefined;
+
     return (
-        <AppLayoutTemplate breadcrumbs={breadcrumbs}>
+        <AppLayout title={pageTitle}>
             {children}
-        </AppLayoutTemplate>
+        </AppLayout>
     );
 }

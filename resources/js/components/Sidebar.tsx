@@ -50,16 +50,16 @@ export default function Sidebar({ currentPath, onClose }: SidebarProps) {
     isActive('/assets') || isActive('/hardware') || isActive('/software');
 
   return (
-    <aside className="w-64 bg-gray-900 text-gray-100 flex flex-col flex-shrink-0">
+    <aside className="w-64 max-w-[85vw] h-full max-h-[100dvh] bg-gray-900 text-gray-100 flex flex-col flex-shrink-0 select-none overflow-hidden">
       {/* Logo Header */}
-      <div className="px-6 py-5 border-b border-gray-800">
+      <div className="px-5 py-4 sm:px-6 sm:py-5 border-b border-gray-800 flex-shrink-0">
         <div className="flex items-center space-x-3">
-          <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-lg flex items-center justify-center">
-            <i className="fas fa-shield-halved text-white text-xl"></i>
+          <div className="w-9 h-9 sm:w-10 sm:h-10 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-lg flex items-center justify-center flex-shrink-0">
+            <i className="fas fa-shield-halved text-white text-lg sm:text-xl"></i>
           </div>
-          <div>
-            <h1 className="text-lg font-bold text-white">CyberSec</h1>
-            <p className="text-xs text-gray-400">Security Portal</p>
+          <div className="min-w-0">
+            <h1 className="text-base sm:text-lg font-bold text-white leading-tight truncate">CyberSec</h1>
+            <p className="text-[11px] sm:text-xs text-gray-400 truncate">Security Portal</p>
           </div>
         </div>
         {isUnassigned && (
@@ -341,23 +341,23 @@ export default function Sidebar({ currentPath, onClose }: SidebarProps) {
       </nav>
 
       {/* User Footer */}
-      <div className="px-4 py-4 border-t border-gray-800">
+      <div className="px-4 py-3 sm:py-4 border-t border-gray-800 flex-shrink-0 bg-gray-900/90 backdrop-blur-sm">
         <div className="flex items-center space-x-3">
           <img
             src={`https://ui-avatars.com/api/?name=${encodeURIComponent(user.name)}&background=3b82f6&color=fff`}
             alt="User"
-            className="w-10 h-10 rounded-full"
+            className="w-9 h-9 sm:w-10 sm:h-10 rounded-full flex-shrink-0"
           />
           <div className="flex-1 min-w-0">
-            <p className="text-sm font-medium text-white truncate">{user.name}</p>
-            <p className="text-xs text-gray-400 truncate">{roleLabel}</p>
+            <p className="text-xs sm:text-sm font-medium text-white truncate">{user.name}</p>
+            <p className="text-[10px] sm:text-xs text-gray-400 truncate">{roleLabel}</p>
           </div>
           <Link
             href="/logout"
             method="post"
             as="button"
             onClick={go}
-            className="text-gray-400 hover:text-white p-1"
+            className="text-gray-400 hover:text-white p-1.5 rounded-lg hover:bg-gray-800 transition flex-shrink-0"
             title="Sign Out"
           >
             <i className="fas fa-right-from-bracket"></i>

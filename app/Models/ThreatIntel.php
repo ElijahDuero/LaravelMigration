@@ -12,11 +12,12 @@ class ThreatIntel extends Model
 
     protected $fillable = [
         'ioc_id', 'type', 'value', 'severity', 'status', 'confidence', 'source', 'tags',
-        'description', 'first_seen', 'last_seen', 'expiry_date', 'misp_event',
+        'description', 'first_seen', 'last_seen', 'expiry_date', 'is_sample', 'misp_event',
         'vt_permalink', 'abuse_report', 'created_by', 'created_at', 'updated_at',
     ];
 
     protected $casts = [
+        'is_sample'   => 'boolean',
         'first_seen'  => 'date',
         'last_seen'   => 'date',
         'expiry_date' => 'date',

@@ -377,32 +377,41 @@ class SettingsController extends Controller
 
     private function seedThreatIntel(): array
     {
-        $statuses  = ['Active', 'Inactive', 'Expired'];
-        $inserted  = 0;
+        $statuses    = ['Active', 'Inactive', 'Whitelisted'];
+        $confidences = ['Low', 'Medium', 'High'];
+        $inserted    = 0;
 
         $samples = [
-            ['type' => 'Phishing Domain', 'value' => 'secure-banking-update.xyz',    'severity' => 'High'],
-            ['type' => 'Malicious IP',    'value' => '185.220.101.47',               'severity' => 'Critical'],
-            ['type' => 'Malicious IP',    'value' => '91.108.4.0',                   'severity' => 'High'],
-            ['type' => 'Blocked IP',      'value' => '198.51.100.23',                'severity' => 'Medium'],
-            ['type' => 'Malware Hash',    'value' => 'a3f4c5d9e8b2f1a0c7d6e5f4a3b2', 'severity' => 'Critical'],
+            ['type' => 'Phishing Domain', 'value' => 'secure-banking-update.xyz',     'severity' => 'High'],
+            ['type' => 'Malicious IP',    'value' => '185.220.101.47',                'severity' => 'Critical'],
+            ['type' => 'Malicious IP',    'value' => '91.108.4.0',                    'severity' => 'High'],
+            ['type' => 'Blocked IP',      'value' => '198.51.100.23',                 'severity' => 'Medium'],
+            ['type' => 'Malware Hash',    'value' => 'a3f4c5d9e8b2f1a0c7d6e5f4a3b2',  'severity' => 'Critical'],
             ['type' => 'Suspicious URL',  'value' => 'http://malware-cdn.ru/payload', 'severity' => 'High'],
         ];
 
+        // Find last ioc_id sequence
+        $lastIoc = DB::table('threat_intel')->orderByRaw("CAST(SUBSTRING(ioc_id, 5) AS UNSIGNED) DESC")->value('ioc_id');
+        $startNum = $lastIoc ? (int) substr($lastIoc, 4) : 0;
+
         for ($i = 1; $i <= 25; $i++) {
             $s = $samples[($i - 1) % count($samples)];
+            $iocId = 'IOC-' . str_pad((string) ($startNum + $i), 5, '0', STR_PAD_LEFT);
+
             DB::table('threat_intel')->insert([
+                'ioc_id'      => $iocId,
                 'type'        => $s['type'],
                 'value'       => $s['value'] . '-' . $i,
                 'severity'    => $s['severity'],
                 'status'      => $statuses[array_rand($statuses)],
-                'confidence'  => random_int(50, 100),
+                'confidence'  => $confidences[array_rand($confidences)],
                 'source'      => 'Sample Seeder',
                 'description' => "Sample threat indicator #{$i} for testing purposes.",
                 'first_seen'  => now()->subDays(random_int(10, 180)),
                 'last_seen'   => now()->subDays(random_int(1, 10)),
                 'expiry_date' => now()->addDays(random_int(30, 365)),
                 'is_sample'   => 1,
+                'created_by'  => 'seeder',
                 'created_at'  => now(),
                 'updated_at'  => now(),
             ]);

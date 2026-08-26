@@ -90,7 +90,7 @@ export default function AppLayout({ children, title, subtitle }: AppLayoutProps)
           onMouseEnter={onSidebarEnter}
           onMouseLeave={onSidebarLeave}
           style={{ transform: sidebarOpen ? 'translateX(0)' : 'translateX(-100%)' }}
-          className="fixed top-0 left-0 h-full z-50 transition-transform duration-200 ease-out shadow-2xl"
+          className="fixed top-0 left-0 h-full h-[100dvh] max-w-[85vw] z-50 transition-transform duration-200 ease-out shadow-2xl flex"
         >
           <Sidebar currentPath={url} onClose={() => setSidebarOpen(false)} />
         </div>

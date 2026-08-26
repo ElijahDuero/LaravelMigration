@@ -16,14 +16,13 @@ createInertiaApp({
                 return null;
             case name.startsWith('auth/'):
                 return AuthLayout;
-            // settings/index is a full module page — it self-wraps like dashboard/incidents/etc.
-            // Only the sub-pages (profile, security, appearance) use the SettingsLayout panel.
-            case name === 'settings/index':
-                return null;
-            case name.startsWith('settings/'):
+            case name.startsWith('settings/profile') ||
+                 name.startsWith('settings/security') ||
+                 name.startsWith('settings/appearance'):
                 return [AppLayout, SettingsLayout];
+            // All CyberSec pages (dashboard, incidents, assets, settings/index, etc.) wrap themselves with AppLayout
             default:
-                return AppLayout;
+                return null;
         }
     },
     strictMode: true,
