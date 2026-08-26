@@ -171,18 +171,38 @@ class SettingsController extends Controller
 
             foreach ($modules as $mod) {
                 $deleted[$mod] = match ($mod) {
-                    'incidents'    => DB::table('incidents')->where('is_sample', 1)->delete(),
-                    'assets'       => DB::table('hardware')->where('is_sample', 1)->delete()
-                                     + DB::table('software')->where('is_sample', 1)->delete(),
-                    'threat_intel' => DB::table('threat_intel')->where('is_sample', 1)->delete(),
+                    'incidents'    => (int) rescue(
+                        fn () => DB::table('incidents')->where('is_sample', 1)->delete(),
+                        fn () => DB::table('incidents')->where('created_by', 'seeder')->delete(),
+                        false
+                    ),
+                    'assets'       => (int) rescue(
+                        fn () => DB::table('hardware')->where('is_sample', 1)->delete()
+                               + DB::table('software')->where('is_sample', 1)->delete(),
+                        fn () => DB::table('hardware')->where('created_by', 'seeder')->delete()
+                               + DB::table('software')->where('created_by', 'seeder')->delete(),
+                        false
+                    ),
+                    'threat_intel' => (int) rescue(
+                        fn () => DB::table('threat_intel')->where('is_sample', 1)->delete(),
+                        fn () => DB::table('threat_intel')->where('created_by', 'seeder')->orWhere('source', 'Sample Seeder')->delete(),
+                        false
+                    ),
                     // systems & branches use sys_id/code prefix 'SYS-'/'MAIN|CEBU|...' — delete by known seeded IDs
-                    'systems'      => DB::table('systems')
-                                        ->where('created_by', 'seeder')->delete(),
-                    'branches'     => DB::table('branch_security')
-                                        ->whereIn('branch', ['Main Campus','Cebu Branch','Davao Branch',
-                                            'Iloilo Branch','Cagayan de Oro','Baguio Branch','Data Center','Zamboanga Branch'])
-                                        ->delete()
-                                     + DB::table('branches')->where('created_by', 'seeder')->delete(),
+                    'systems'      => (int) rescue(
+                        fn () => DB::table('systems')->where('created_by', 'seeder')->delete(),
+                        0,
+                        false
+                    ),
+                    'branches'     => (int) rescue(
+                        fn () => DB::table('branch_security')
+                                    ->whereIn('branch', ['Main Campus','Cebu Branch','Davao Branch',
+                                        'Iloilo Branch','Cagayan de Oro','Baguio Branch','Data Center','Zamboanga Branch'])
+                                    ->delete()
+                               + DB::table('branches')->where('created_by', 'seeder')->delete(),
+                        0,
+                        false
+                    ),
                     default        => 0,
                 };
             }
