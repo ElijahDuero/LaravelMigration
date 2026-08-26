@@ -287,10 +287,24 @@ class SettingsController extends Controller
         $hostnames  = ['WS-001', 'WS-002', 'SRV-DB01', 'SRV-WEB01', 'LAPTOP-HR01',
                         'PC-IT-003', 'SRV-FILE01', 'LAPTOP-SEC02', null, null];
 
+        $year = now()->year;
+        $lastInc = DB::table('incidents')->whereYear('created_at', $year)->orderByDesc('id')->value('incident_number');
+        $startSeq = 0;
+        if ($lastInc && preg_match('/INC-\d{4}-(\d+)/', $lastInc, $m)) {
+            $startSeq = (int) $m[1];
+        }
+
         $inserted = 0;
         for ($i = 1; $i <= 85; $i++) {
             $incidentAt = now()->subDays(random_int(1, 365))->subHours(random_int(0, 23));
-            $num        = 'INC-' . $incidentAt->format('Y') . '-' . str_pad((string) $i, 4, '0', STR_PAD_LEFT);
+            $seq = $startSeq + $i;
+            $num = sprintf('INC-%04d-%04d', $year, $seq);
+
+            // Ensure uniqueness across the whole table if any prior year has this exact string
+            while (DB::table('incidents')->where('incident_number', $num)->exists()) {
+                $seq++;
+                $num = sprintf('INC-%04d-%04d', $year, $seq);
+            }
 
             DB::table('incidents')->insert([
                 'incident_number'  => $num,
@@ -328,15 +342,20 @@ class SettingsController extends Controller
             ['type' => 'Printer', 'manufacturer' => 'HP',     'model' => 'LaserJet Pro MFP 4101'],
         ];
 
+        $lastHw = DB::table('hardware')->orderByRaw("CAST(SUBSTRING(tag, 4) AS UNSIGNED) DESC")->value('tag');
+        $hwStart = $lastHw ? (int) substr($lastHw, 3) : 0;
+
         for ($i = 1; $i <= 25; $i++) {
             $hw = $hwItems[($i - 1) % count($hwItems)];
+            $tag = 'HW-' . str_pad((string) ($hwStart + $i), 4, '0', STR_PAD_LEFT);
+
             DB::table('hardware')->insert([
-                'tag'          => 'HW-' . str_pad((string) $i, 4, '0', STR_PAD_LEFT),
+                'tag'          => $tag,
                 'name'         => $hw['manufacturer'] . ' ' . $hw['model'],
                 'type'         => $hw['type'],
                 'manufacturer' => $hw['manufacturer'],
                 'model'        => $hw['model'],
-                'serial'       => 'SN-SAMPLE-' . $i,
+                'serial'       => 'SN-SAMPLE-' . ($hwStart + $i),
                 'branch'       => $branches[array_rand($branches)],
                 'status'       => 'Active',
                 'is_sample'    => 1,
@@ -355,10 +374,15 @@ class SettingsController extends Controller
             ['name' => 'Moodle LMS',                     'category' => 'LMS',          'vendor' => 'Moodle',    'total_licenses' => 500, 'used_licenses' => 380],
         ];
 
+        $lastSw = DB::table('software')->orderByRaw("CAST(SUBSTRING(sw_id, 4) AS UNSIGNED) DESC")->value('sw_id');
+        $swStart = $lastSw ? (int) substr($lastSw, 3) : 0;
+
         for ($i = 1; $i <= 25; $i++) {
             $sw = $swItems[($i - 1) % count($swItems)];
+            $swId = 'SW-' . str_pad((string) ($swStart + $i), 4, '0', STR_PAD_LEFT);
+
             DB::table('software')->insert([
-                'sw_id'          => 'SW-' . str_pad((string) $i, 4, '0', STR_PAD_LEFT),
+                'sw_id'          => $swId,
                 'name'           => $sw['name'],
                 'category'       => $sw['category'],
                 'vendor'         => $sw['vendor'],
