@@ -13,7 +13,11 @@
             "dest": "/build/$1"
         },
         {
-            "src": "/(favicon\\.(?:ico|png|svg)|apple-touch-icon\\.png|robots\\.txt)",
+            "src": "/css/(.*)",
+            "dest": "/css/$1"
+        },
+        {
+            "src": "/(favicon\\.(?:ico|png|svg)|apple-touch-icon\\.png|robots\\.txt|shield\\.png)",
             "dest": "/$1"
         },
         {

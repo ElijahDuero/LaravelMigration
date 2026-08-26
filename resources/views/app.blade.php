@@ -4,16 +4,23 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        {{-- Inline script to detect system dark mode preference and apply it immediately --}}
+        {{-- Inline script to detect system dark/ember mode preference and apply it immediately --}}
         <script>
             (function() {
-                const appearance = '{{ $appearance ?? "system" }}';
+                const cookieTheme = (document.cookie.match(/theme=([^;]+)/) || [])[1];
+                const appearance = cookieTheme || '{{ $appearance ?? "system" }}';
 
-                if (appearance === 'system') {
+                if (appearance === 'dark') {
+                    document.documentElement.classList.add('dark');
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                } else if (appearance === 'blackorange') {
+                    document.documentElement.classList.add('blackorange');
+                    document.documentElement.setAttribute('data-theme', 'blackorange');
+                } else if (appearance === 'system') {
                     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-
                     if (prefersDark) {
                         document.documentElement.classList.add('dark');
+                        document.documentElement.setAttribute('data-theme', 'dark');
                     }
                 }
             })();
@@ -26,13 +33,21 @@
             }
 
             html.dark {
-                background-color: oklch(0.145 0 0);
+                background-color: #0f172a;
+            }
+
+            html[data-theme="blackorange"],
+            html.blackorange {
+                background-color: #0a0a0a;
             }
         </style>
 
         <link rel="icon" href="/favicon.ico" sizes="any">
         <link rel="icon" href="/favicon.svg" type="image/svg+xml">
         <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="/css/custom.css">
 
         @fonts
 
